@@ -1,3 +1,10 @@
+task wrapper(type: Wrapper) {
+    // 声明gradle使用的版本
+    gradleVersion = '2.1'
+    // 默认的gradlew命令太长简化为'g'
+    scriptFile = 'g'
+}
+
 task hello1 << {
     println "hello1"
 }
@@ -18,3 +25,40 @@ task showTasks {
     println tasks.class
     println tasks.size()
 }
+
+tasks.create(name: 'hello4') {
+    println "hello4"
+}
+
+task hello5(dependsOn: hello3) << {
+    println "hello5"
+}
+
+task hello6 << {
+    println 'hello6'
+}
+
+hello6.dependsOn hello5
+
+task hello7 << {
+    description = 'this is hello7'
+    println description
+}
+
+task hello8 << {
+    println(description)
+}
+
+hello8 {
+    description = "this is hello8"
+}
+
+task hello9 << {
+    println(description)
+}
+
+hello9.configure {
+    description = "this is hello9"
+}
+
+
